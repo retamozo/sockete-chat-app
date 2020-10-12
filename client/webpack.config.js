@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const yaml = require('js-yaml')
 const fs = require("fs");
 
+
 const globalStyles = [
     // /node_modules/,
     // path.resolve(__dirname, "node_modules"),
@@ -66,7 +67,16 @@ module.exports = {
         publicPath: "./",
         contentBase: path.join(__dirname, "./dist"),
         hot: true,
-        port: 8080,
+        port: 3000,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods":
+                "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+            "Access-Control-Allow-Headers":
+                "X-Requested-With, content-type, Authorization",
+        },
+        allowedHosts: ["localhost:3000"],
+
     },
     externals: {
         APP_CONFIG: JSON.stringify(appConfig),

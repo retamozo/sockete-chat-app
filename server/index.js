@@ -10,6 +10,16 @@ const io = socket(server)
 io.on('connection', socket => {
     console.log('user is connected', socket);
 
+    socket.on('join', ({ name, room }, callback) => {
+        try {
+            console.log('server name', name)
+            console.log('server room', room)
+            callback()
+        } catch (err) {
+            callback({ error: 'HUBO UN GRAN ERROR!' })
+        }
+    })
+
     socket.on('disconnect', () => {
         console.log('user had left');
     })
@@ -17,7 +27,7 @@ io.on('connection', socket => {
 
 app.use(router)
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 3000;
 app.set('port', port)
 
 const watchPortMessage = () => {
